@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import {useState, useEffect, useRef} from 'react';
 import './App.css';
 
 function App() {
+  let [fullName, setfullName] = useState("");
+  let firstName = useRef();
+  let lastName = useRef();
+
+  let buildFullName = ()=>{
+    // let firstName = document.getElementById("first").value;
+    // let lastName = document.getElementById("last").value;
+    let fullname = "Full Name: "+firstName.current.value+" "+lastName.current.value;
+    setfullName(fullname);
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1>Full Name Display</h1>
+        <p>First Name :<input id="first" ref={firstName} type="text"/></p>
+        <p>Last Name :<input id="last" ref={lastName} type="text"/></p>
+        {/* <input type="submit"/> */}
+        <button onClick={buildFullName} >Submit</button>
+      {fullName !== "" && 
+        (<div>
+          <p>{fullName}</p>
+        </div>)
+      }
     </div>
   );
 }
