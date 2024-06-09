@@ -7,7 +7,8 @@ function App() {
   let firstName = useRef();
   let lastName = useRef();
 
-  let buildFullName = ()=>{
+  let buildFullName = (event)=>{
+    event.preventDefault();
     // let firstName = document.getElementById("first").value;
     // let lastName = document.getElementById("last").value;
     let fullname = "Full Name: "+firstName.current.value+" "+lastName.current.value;
@@ -17,11 +18,13 @@ function App() {
 
   return (
     <div className="App">
+      <form onSubmit={buildFullName}>
         <h1>Full Name Display</h1>
-        <p>First Name :<input id="first" ref={firstName} type="text"/></p>
-        <p>Last Name :<input id="last" ref={lastName} type="text"/></p>
+        <p>First Name :<input required id="first" ref={firstName} type="text"/></p>
+        <p>Last Name :<input required id="last" ref={lastName} type="text"/></p>
         {/* <input type="submit"/> */}
-        <button onClick={buildFullName} >Submit</button>
+        <button type="submit" >Submit</button>
+      </form>
       {fullName !== "" && 
         (<div>
           <p>{fullName}</p>
